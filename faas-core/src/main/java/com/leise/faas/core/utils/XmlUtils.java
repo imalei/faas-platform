@@ -1,5 +1,6 @@
 package com.leise.faas.core.utils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +9,24 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.dom4j.tree.DefaultAttribute;
 
 public class XmlUtils {
 
 	private XmlUtils() {
 		throw new IllegalStateException("Utility class");
+	}
+	
+	public static Document load(String filePath) {
+		 SAXReader reader = new SAXReader();  
+		 Document doc = null;
+		try {
+			doc = reader.read(new File(filePath));
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
+		 return doc;
 	}
 
 	public static Document XMLparse(String xmlStr) {

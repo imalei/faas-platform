@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?> 
 <root>
 	<flow id="test" name="单笔查询流程">
 		<processers>

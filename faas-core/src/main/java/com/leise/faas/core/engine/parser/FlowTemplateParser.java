@@ -3,23 +3,24 @@ package com.leise.faas.core.engine.parser;
 import java.util.Iterator;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.leise.faas.core.utils.XmlUtils;
+
 
 public class FlowTemplateParser {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public String parse(String xml) {
+	public String parse(String filePath) {
 
-		Document doc = null;
-		try {
-			doc = DocumentHelper.parseText(xml);
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		} // 将字符串转为XML
-		Element rootElement = doc.getRootElement(); // 获取根节点
+		Document doc = XmlUtils.load(filePath);
+		Element rootElement = doc.getRootElement(); 
+		
 		System.out.println("根节点：" + rootElement.getName()); // 拿到根节点的名称
-		Iterator iter = rootElement.elementIterator("head"); // 获取根节点下的子节点head
+		Iterator iter = rootElement.elementIterator("flow"); // 获取根节点下的子节点flow
 
 		// 遍历head节点
 		while (iter.hasNext()) {
