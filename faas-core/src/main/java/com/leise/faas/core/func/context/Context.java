@@ -10,8 +10,8 @@ public class Context {
 	private Map<String, Object> outParams;
 	
 	public Context() {
-		inParams = new HashMap<String, Object>();
-		outParams = new HashMap<String, Object>();
+		inParams = new HashMap<>();
+		outParams = new HashMap<>();
 	}
 
 	public Map<String, Object> getInParams() {
