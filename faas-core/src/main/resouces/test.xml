@@ -1,5 +1,5 @@
 <root>
-	<flow id="singleQueryFlow" name="单笔查询流程">
+	<flow id="test" name="单笔查询流程">
 		<processers>
 			<processer id="aaa" name="" refClass="com.leise.faas.core.func.flow.StartFunc">
 				<input></input>
