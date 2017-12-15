@@ -16,7 +16,7 @@ public class FuncTemplate {
 	private OutputTemplate outputTemplate;
 
 	private Map<String, TargetTemplate> targetTemplates;
-	
+
 	private Map<String, String> initParams;
 
 	public FuncTemplate(String id, String name, String refClass) {

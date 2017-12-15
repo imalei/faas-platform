@@ -6,9 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.leise.faas.core.context.Context;
 import com.leise.faas.core.engine.flow.FlowEngine;
-import com.leise.faas.core.func.context.Context;
-import com.leise.faas.core.func.db.SingleQueryFunc;
 
 @SpringBootApplication
 public class Application {
@@ -31,6 +30,7 @@ public class Application {
 	@Bean
 	CommandLineRunner sampleCommandLineRunner() {
 		Context context = new Context();
+		context.getInParams().put("state", "CA");
 		flowEngine.executeFlow("test", context);
 		return args -> System.out.println(flowEngine);
 	}

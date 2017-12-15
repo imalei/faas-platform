@@ -19,7 +19,7 @@ public final class EngineConstant {
 	public static final String TARGETS_NODE = "targets";
 
 	public static final String TARGET_NODE = "target";
-	
+
 	public static final String INIT_NODE = "init";
 
 	public static final String ID_ATTRIBUTE = "id";

@@ -39,9 +39,9 @@ public class XmlUtils {
 			e.printStackTrace();
 		}
 		return doc;
-	}
+	} 
 
-	public static Document XMLparse(String xmlStr) {
+	public static Document parse(String xmlStr) {
 		Document doc = null;
 		try {
 			doc = DocumentHelper.parseText(xmlStr);

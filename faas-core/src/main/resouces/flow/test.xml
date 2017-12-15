@@ -1,47 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<root>
-	<flow id="test" name="单笔查询流程">
-		<funcs>
-			<func id="aaa" name="" refClass="com.leise.faas.core.func.flow.StartFunc">
-				<targets>
-					<target id="bbb" condition="" />
-				</targets>
-			</func>
-			<func id="bbb" name="" refClass="com.leise.faas.core.func.db.SingleQueryFunc">
-				<input>
-					<param id="key1" name="参数1" />
-					<param id="key2" name="参数2" />
-					<param id="key3" name="参数3" />
-				</input>
-				<output>
-					<param id="key4" name="参数4" />
-					<param id="key5" name="参数5" />
-					<param id="key6" name="参数6" />
-				</output>
-				<init>
-					<param id="statement" value="CityMapper.findByState"/>
-				</init>
-				<targets>
-					<target id="ccc" condition="" />
-					<target id="ddd" condition="" />
-				</targets>
-			</func>
-			<func id="ccc" name="" refClass="com.leise.faas.core.func.db.SingleQueryFunc">
-				<input></input>
-				<output></output>
-				<targets>
-					<target id="ddd" condition="" />
-				</targets>
-			</func>
-			<func id="ddd" name="" refClass="com.leise.faas.core.func.flow.EndFunc">
-				<input></input>
-				<output></output>
-				<targets>
-					<target id="" condition="" />
-					<target id="" condition="" />
-					<target id="" condition="" />
-				</targets>
-			</func>
-		</funcs>
-	</flow>
-</root>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<flow id="test" name="单笔查询流程">
+	<input>
+		<param id="state" name="CA" />
+		<param id="key2" name="参数2" />
+		<param id="key3" name="参数3" />
+	</input>
+	<output>
+		<param id="key4" name="参数4" />
+		<param id="key5" name="参数5" />
+		<param id="key6" name="参数6" />
+	</output>
+
+	<operations>
+		<operation id="aaa" name="" refClass="com.leise.faas.core.func.flow.StartFunc">
+			<targets>
+				<target id="bbb" condition="bbb" />
+			</targets>
+		</operation>
+		<operation id="bbb" name="" refClass="com.leise.faas.core.func.db.SingleQueryFunc">
+			<init>
+				<data id="statement" value="CityMapper.findByState" />
+			</init>
+			<targets>
+				<target id="ccc" condition="#state == 'CA'" />
+				<target id="ddd" condition="" />
+			</targets>
+		</operation>
+		<operation id="ccc" name="" refClass="com.leise.faas.core.func.flow.EndFunc">
+		</operation>
+	</operations>
+</flow>
+
