@@ -8,7 +8,7 @@ public class Context {
 	private Map<String, Object> inParams;
 
 	private Map<String, Object> outParams;
-	
+
 	public Context() {
 		inParams = new HashMap<>();
 		outParams = new HashMap<>();

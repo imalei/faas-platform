@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.leise.faas.core.engine.flow.FlowEngine;
 import com.leise.faas.core.func.context.Context;
 import com.leise.faas.core.func.db.SingleQueryFunc;
 
@@ -13,18 +14,25 @@ import com.leise.faas.core.func.db.SingleQueryFunc;
 public class Application {
 
 	@Autowired
-	private SingleQueryFunc singleQueryFunc;
+	FlowEngine flowEngine;
 
 	public static void main(final String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+
+	// @Bean
+	// CommandLineRunner sampleCommandLineRunner() {
+	// singleQueryFunc.setStatement("CityMapper.findByState");
+	// Context context = new Context();
+	// context.getInParams().put("state", "CA");
+	// return args -> System.out.println(singleQueryFunc.execute(context));
+	// }
+
 	@Bean
 	CommandLineRunner sampleCommandLineRunner() {
-		singleQueryFunc.setStatement("CityMapper.findByState");
 		Context context = new Context();
-		context.getInParams().put("state", "CA");
-		return args -> System.out.println(singleQueryFunc.execute(context));
+		flowEngine.executeFlow("test", context);
+		return args -> System.out.println(flowEngine);
 	}
 
 }

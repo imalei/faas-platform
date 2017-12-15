@@ -1,15 +1,24 @@
-package com.leise.faas.core.engine.cache;
+package com.leise.faas.core.cache;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
+import com.leise.faas.core.engine.parser.FlowTemplateParser;
 import com.leise.faas.core.engine.template.FlowTemplate;
 
-public class FlowTemplateCache {
+@Component
+public class FlowCache {
+
+	@Autowired
+	public FlowTemplateParser flowTemplateParser;
 
 	// 缓存接口这里是LoadingCache，LoadingCache在缓存项不存在时可以自动加载缓存
 	LoadingCache<String, FlowTemplate> cache = CacheBuilder.newBuilder()
@@ -24,8 +33,8 @@ public class FlowTemplateCache {
 			// 设置要统计缓存的命中率
 			.recordStats()
 			// 设置缓存的移除通知
-			.removalListener(new RemovalListener<String, Object>() {
-				public void onRemoval(RemovalNotification<String, Object> notification) {
+			.removalListener(new RemovalListener<String, FlowTemplate>() {
+				public void onRemoval(RemovalNotification<String, FlowTemplate> notification) {
 					System.out.println(notification.getKey() + " was removed, cause is " + notification.getCause());
 				}
 			})
@@ -34,9 +43,22 @@ public class FlowTemplateCache {
 			.build(new CacheLoader<String, FlowTemplate>() {
 				@Override
 				public FlowTemplate load(String key) throws Exception {
-					return null;
+					return flowTemplateParser.parse(key);
 				}
 
 			});
+
+	public FlowTemplate getFlowTemplate(String key) {
+
+		FlowTemplate template = null;
+		try {
+			template = cache.get(key);
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return template;
+	}
 
 }

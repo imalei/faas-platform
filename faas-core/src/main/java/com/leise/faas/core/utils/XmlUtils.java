@@ -1,6 +1,7 @@
 package com.leise.faas.core.utils;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,16 +18,27 @@ public class XmlUtils {
 	private XmlUtils() {
 		throw new IllegalStateException("Utility class");
 	}
-	
+
 	public static Document load(String filePath) {
-		 SAXReader reader = new SAXReader();  
-		 Document doc = null;
+		SAXReader reader = new SAXReader();
+		Document doc = null;
 		try {
 			doc = reader.read(new File(filePath));
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}
-		 return doc;
+		return doc;
+	}
+
+	public static Document load(InputStream in) {
+		SAXReader reader = new SAXReader();
+		Document doc = null;
+		try {
+			doc = reader.read(in);
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
+		return doc;
 	}
 
 	public static Document XMLparse(String xmlStr) {

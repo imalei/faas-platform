@@ -10,7 +10,7 @@ import com.leise.faas.core.func.Func;
 import com.leise.faas.core.func.context.Context;
 import com.leise.faas.core.func.enums.FuncStatus;
 
-@Component
+@Component("com.leise.faas.core.func.db.SingleQueryFunc")
 public class SingleQueryFunc implements Func {
 
 	@Autowired
@@ -27,13 +27,9 @@ public class SingleQueryFunc implements Func {
 
 		return FuncStatus.SUCCESS;
 	}
-	
-	public String getStatement() {
-		return statement;
-	}
 
-	public void setStatement(String statement) {
-		this.statement = statement;
+	public void setInitParams(Map<String, String> initParams) {
+		this.statement = initParams.get("statement");
 	}
 
 }

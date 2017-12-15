@@ -1,5 +1,6 @@
 package com.leise.faas.core.engine.template;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class FlowTemplate {
@@ -8,7 +9,15 @@ public class FlowTemplate {
 
 	private String name;
 
-	private Map<String, ProcesserTemplate> processerTemplate;
+	private Map<String, FuncTemplate> funcTemplates;
+
+	private String startFuncId;
+
+	public FlowTemplate(String id, String name) {
+		this.id = id;
+		this.name = name;
+		funcTemplates = new HashMap<>();
+	}
 
 	public String getId() {
 		return id;
@@ -26,12 +35,20 @@ public class FlowTemplate {
 		this.name = name;
 	}
 
-	public Map<String, ProcesserTemplate> getProcesserTemplate() {
-		return processerTemplate;
+	public Map<String, FuncTemplate> getFuncTemplates() {
+		return funcTemplates;
 	}
 
-	public void setProcesserTemplate(Map<String, ProcesserTemplate> processerTemplate) {
-		this.processerTemplate = processerTemplate;
+	public void setFuncTemplates(Map<String, FuncTemplate> funcTemplates) {
+		this.funcTemplates = funcTemplates;
+	}
+
+	public String getStartFuncId() {
+		return startFuncId;
+	}
+
+	public void setStartFuncId(String startFuncId) {
+		this.startFuncId = startFuncId;
 	}
 
 }
